@@ -240,6 +240,9 @@ class GoogleDriveStorage(Storage):
                 meta_data['parents'] = [parent_id]
         current_folder_data = self._drive_service.files().create(
             body=meta_data).execute()
+
+        self._apply_permissions(current_folder_data['id'])
+
         return current_folder_data
 
     def _check_file_exists(self, filename, parent_id=None):
@@ -337,11 +340,14 @@ class GoogleDriveStorage(Storage):
             media_body=media_body).execute()
 
         # Setting up permissions
-        for p in self._permissions:
-            self._drive_service.permissions().create(
-                fileId=file_data['id'], body={**p.raw}).execute()
+        self._apply_permissions()
 
         return file_data.get('originalFilename', file_data.get('name'))
+
+    def _apply_permissions(self, file_id):
+        for p in self._permissions:
+            self._drive_service.permissions().create(
+                fileId=file_id, body={**p.raw}).execute()
 
     def delete(self, name):
         """
