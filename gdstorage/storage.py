@@ -146,7 +146,7 @@ class GoogleDriveStorage(Storage):
     KEY_FILE_PATH = 'GOOGLE_DRIVE_STORAGE_JSON_KEY_FILE'
     KEY_FILE_CONTENT = 'GOOGLE_DRIVE_STORAGE_JSON_KEY_FILE_CONTENTS'
 
-    def __init__(self, json_keyfile_path=None, permissions=None):
+    def __init__(self, json_keyfile_path=None, permissions=None, delegate_to=None):
         """
         Handles credentials and builds the google service.
 
@@ -166,6 +166,9 @@ class GoogleDriveStorage(Storage):
                 json.loads(os.environ[self.KEY_FILE_CONTENT]),
                 scopes=['https://www.googleapis.com/auth/drive'],
             )
+
+        if delegate_to:
+            credentials = credentials.with_subject(delegate_to)
 
         self._permissions = None
         if permissions is None:
