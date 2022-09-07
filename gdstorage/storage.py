@@ -340,7 +340,7 @@ class GoogleDriveStorage(Storage):
             media_body=media_body).execute()
 
         # Setting up permissions
-        self._apply_permissions()
+        self._apply_permissions(file_data['id'])
 
         return file_data.get('originalFilename', file_data.get('name'))
 
