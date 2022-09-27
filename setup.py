@@ -15,16 +15,16 @@ INSTALL_REQUIRES = [
 ]
 
 setuptools.setup(
-    name="django-googledrive-storage",
+    name="private-django-googledrive-storage",
     version="1.6.0",
-    author="Gian Luca Dalla Torre",
-    author_email="gianluca.dallatorre@gmail.com",
+    author="Gian Luca Dalla Torre (modified by Edward Bridges)",
+    author_email="gianluca.dallatorre@gmail.com (github@eqbridges.com)",
     description=(
         "Storage implementation for Django that interacts with Google Drive"),
     license="LICENSE.txt",
     keywords="django google drive storage googledrive",
-    url="https://github.com/torre76/django-googledrive-storage",
-    download_url="https://github.com/torre76/django-googledrive-storage/tarball/1.6.0",
+    url="https://github.com/ebridges/django-googledrive-storage",
+    download_url="https://github.com/ebridges/django-googledrive-storage/tarball/1.6.0",
     packages=setuptools.find_packages(
         exclude=["django_googledrive_storage", "gdstorage.tests", "docs"]),
     long_description=long_description,
